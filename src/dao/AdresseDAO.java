@@ -1,21 +1,21 @@
 package dao;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-public class ContactDAO {
+public class AdresseDAO {
 	
-	public ContactDAO()
+	public AdresseDAO()
 	{
 
 			
 	}
 	
 	
-	public void CreateContactDAO(String lastname, String name, String mail, String id, String street, String city, String zip, String country)
+	public void CreateAddressDAO(String street, String city, String cp, String country, String idContact)
 	{
 		//Configuration
 		String driver ="com.mysql.jdbc.Driver";
@@ -34,7 +34,8 @@ public class ContactDAO {
 			
 			//Statement
 			 stmt = cx.createStatement();
-			 requete = "INSERT INTO Contact(id,nom,prenom,mail) VALUES " + "('" + id +"','" + lastname + "','" + name + "','" + mail + "')";
+			 requete = "INSERT INTO adresse(rue,ville,cp,pays, fk_idContact_adresse) VALUES " + "('" + street +"','" + city + "','" + cp + "','" + country + "','" +idContact+"')";
+			 System.out.println(requete);
 			 int nb = stmt.executeUpdate(requete);
 			 System.out.println("Nombre de lignes mises à jour = " + nb);
 
@@ -64,16 +65,15 @@ public class ContactDAO {
 			{
 				e.printStackTrace();
 			}
-		}
-			 
+		} 
 	}
 	
 	
-	public void ModifyContactDAO(String lastname, String name, String mail, String id)
+	public void ModifyAddressDAO(String street, String city, String cp, String country, String idContact)
 	{
 		//Configuration
 		String driver ="com.mysql.jdbc.Driver";
-		String url ="jdbc:mysql://localhost:3306/GestionContact";
+		String url ="jdbc:mysql://localhost:3306/GestionContact?useSSL=false";
 		String user ="root";
 		String password ="root";
 		String requete="";
@@ -87,10 +87,10 @@ public class ContactDAO {
 			
 			//Statement
 			 stmt = cx.createStatement();
-			 requete = "UPDATE Contact SET nom = '" + lastname + "', prenom = '" + name + "', mail = '" + mail + "' WHERE id = '" + id + "'";
+			 requete = "UPDATE adresse SET rue = '" + street + "', ville = '" + city + "', cp = '" + cp + "', pays = '" + country + "' WHERE fk_idContact_adresse = '" + idContact + "'";
+			 System.out.println(requete);
 			 int nb = stmt.executeUpdate(requete);
 			 System.out.println("Nombre de lignes affectées = " + nb);
-			 
 			 
 		}
 		catch(ClassNotFoundException e)
@@ -122,7 +122,7 @@ public class ContactDAO {
 		
 	}
 	
-	public void DeleteContactDAO(String id)
+	public void DeleteAddressDAO(String id)
 	{
 		//Configuration
 		String driver ="com.mysql.jdbc.Driver";
@@ -140,7 +140,7 @@ public class ContactDAO {
 				
 				//Statement
 				 stmt = cx.createStatement();
-				 requete = "DELETE FROM Contact WHERE id = '" + id + "'";
+				 requete = "DELETE FROM Adresse WHERE id = '" + id + "'";
 				 int nb = stmt.executeUpdate(requete);
 				 System.out.println("Nombre de lignes supprimées = " + nb);
 			}
@@ -172,7 +172,7 @@ public class ContactDAO {
 			}
 		}
 	
-	public void FetchContactDAO(String id)
+	public void FetchAddressDAO(String id)
 	{
 		//Configuration
 		String driver ="com.mysql.jdbc.Driver";
@@ -190,11 +190,11 @@ public class ContactDAO {
 			
 			//Statement
 			 stmt = cx.createStatement();
-			 requete = "SELECT * FROM Contact WHERE ID = '" + id  + "'";
+			 requete = "SELECT * FROM adresse WHERE fk_idContact_adresse = '" + id  + "'";
 			 ResultSet rs = stmt.executeQuery(requete);
 			 while(rs.next())
 			 {
-				 System.out.println("Nom : " + rs.getString("nom") +" \nPrenom : " + rs.getString("prenom") + "\nMail : " + rs.getString("mail"));
+				 System.out.println("Rue : " + rs.getString("rue") +" \nVille: " + rs.getString("ville") + "\nCP : " + rs.getString("cp") + "\nPays : " +rs.getString("pays"));
 			 }
 		}
 		catch(ClassNotFoundException e)
