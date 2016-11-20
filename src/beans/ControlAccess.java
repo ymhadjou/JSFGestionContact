@@ -2,9 +2,6 @@ package beans;
 
 import javax.faces.bean.ManagedBean;
 
-
-
-
 /*annotation qui déclare le Bean à JSF. 
 Cela évite de le faire dans le fichier faces-config.xml
 il est possible de rajouter l'attribut "name" afin de donner un nom d'alias au Bean. exp @ManagedBean(name="control")
@@ -46,7 +43,8 @@ public class ControlAccess {
 		               {
 		    	//si le pass est correct, 
 				 //JSF forwadera l'execution vers la page welcome-page.xhtml
-		      return("welcome-page");
+		     // return("welcome-page");
+		    	return("addContact");
 		    } else {
 		    	//Sinon, vers la page bad-login.xhtml
 		      return("bad-login");

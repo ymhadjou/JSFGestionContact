@@ -19,9 +19,12 @@ public class AdresseDAO {
 	{
 		//Configuration
 		String driver ="com.mysql.jdbc.Driver";
-		String url ="jdbc:mysql://localhost:3306/GestionContact?useSSL=false";
+		//String url ="jdbc:mysql://localhost:3306/GestionContact?useSSL=false";
+		//String user ="root";
+		//String password ="root";
+		String url = "jdbc:mysql://localhost:3306/gestioncontact";
 		String user ="root";
-		String password ="root";
+		String password ="";
 		String requete="";
 		Connection cx = null;
 		Statement stmt = null;
