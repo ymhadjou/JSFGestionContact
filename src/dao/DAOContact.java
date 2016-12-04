@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import domain.Contact;
 
 public class DAOContact {
 
@@ -165,6 +168,52 @@ public class DAOContact {
 			catch (SQLException e) { e.printStackTrace(); }
 			}
 		return null;
+	}
+	
+	public ArrayList<Contact> listContacts(){
+		ArrayList<Contact> liste = new ArrayList<Contact>();
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/gestioncontact";
+		String uid = "root"; String passwd = "";
+		String requete;
+		Connection cx = null;
+		Statement stmt = null;
+		
+		try
+		{
+			Class.forName(driver);
+			cx = DriverManager.getConnection(url, uid, passwd);
+			stmt = cx.createStatement();
+			requete = "select * from contact";
+			ResultSet rs = stmt.executeQuery(requete);
+			
+				while(rs.next())
+				{
+					int id = rs.getInt("id");
+					String lastName = rs.getString("nom");
+					String firstName = rs.getString("prenom");
+					String email = rs.getString("mail");
+					
+					liste.add(new Contact(id, lastName, firstName, email));
+				}
+			} catch (ClassNotFoundException e) {
+				
+				// classe du pilote introuvable
+				
+			} catch (SQLException e) {
+				
+				System.out.println(e.toString());
+				
+			} finally {
+			try { 
+				if (stmt != null) stmt.close();
+				if (cx != null) cx.close();}
+			catch (SQLException e) { e.printStackTrace(); }
+			}
+		
+		
+		return liste;
+		
 	}
 
 }

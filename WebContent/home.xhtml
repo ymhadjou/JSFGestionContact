@@ -6,26 +6,50 @@
       xmlns:f="http://java.sun.com/jsf/core">
 <h:body>
 
-		<h:dataTable value="#{contacts.contacts}" var="contact">
-				<h:column>
-    				<f:facet name="header">ID</f:facet>
-    				#{contact.id}
-    			</h:column>
-    			
-    			<h:column>
-    				<f:facet name="header">nom</f:facet>
-    				#{contact.lastName}
-    			</h:column>
+			<h:form>
+    		   <h:dataTable var="c" value="#{deleteContact.contacts}"
+                    emptyMessage="No Users Found." rowIndexvar="row">
+                    <h:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="id" />
+                        </f:facet>
+                        <h:outputText value="#{c.id}" />
+                    </h:column>
+                    
+                    <h:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="nom" />
+                        </f:facet>
+                        <h:outputText value="#{c.lastName}" />
+                    </h:column>
+                    
+                    <h:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="prenom" />
+                        </f:facet>
+                        <h:outputText value="#{c.firstName}" />
+                    </h:column>
+                    
+                    <h:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="email" />
+                        </f:facet>
+                        <h:outputText value="#{c.email}" />
+                    </h:column>
+                    
+                    <h:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Actions" />
+                        </f:facet>
+                        <h:commandButton value="Delete" action="#{deleteContact.checkInfosContact}">
+                        	
+                        	
+                        	<f:setPropertyActionListener value="#{c}" 
+		target="#{deleteContact.selectedContact}" /> 
+                         </h:commandButton>
+                    </h:column>
 
-    			<h:column>
-    				<f:facet name="header">prenom</f:facet>
-    				#{contact.firstName}
-    			</h:column>
-
-    			<h:column>
-    				<f:facet name="header">email</f:facet>
-    				#{contact.email}
-    			</h:column>
-    		</h:dataTable>
+                </h:dataTable>
+    		</h:form>
 </h:body>
 </html>
