@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head><title>Modify a contact's information</title>
+</h:head>
+<h:body>
+<h1>Enter the following items</h1>
+<!-- Other HTML tags and non-input JSF elements here -->
+
+<h:form>
+   Id <h:inputText value="#{modifyContact.id}"/> <br/> <br/> 
+   Nom  <h:inputText value="#{modifyContact.lastName}"/> <br/> <br/>    
+   Prenom <h:inputText value="#{modifyContact.firstName}"/> <br/> <br/> 
+   Mail <h:inputText value="#{modifyContact.email}"/> <br/> <br/> 
+   <h:commandButton value="modifyContact" action="#{modifyContact.checkInfosContact}"/> <br/> 
+</h:form>
+
+<!-- Other HTML tags and non-input JSF elements here -->
+</h:body></html>
