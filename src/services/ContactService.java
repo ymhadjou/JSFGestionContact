@@ -1,6 +1,9 @@
 package services;
 
+import java.util.ArrayList;
+
 import dao.DAOContact;
+import domain.Contact;
 
 public class ContactService {
 	
@@ -30,6 +33,11 @@ public class ContactService {
 	public String deleteContact(int id)
 	{
 		return dao.deleteContact(id);
+	}
+	
+	public ArrayList<Contact> listeContacts()
+	{
+		return dao.listContacts();
 	}
 
 }
