@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" >
+
+<h:head><title>Add an address to a contact</title>
+</h:head>
+<h:body>
+<h1>Enter address</h1>
+<h:form> 
+<!-- Other HTML tags and non-input JSF elements here -->
+   Rue  <h:inputText value="#{addAddress.street}"/> <br/> <br/>    
+   Ville <h:inputText value="#{addAddress.city}"/> <br/> <br/> 
+   CP 	<h:inputText value="#{addAddress.zip}"/> <br/> <br/> 
+   Pays <h:inputText value="#{addAddress.country}"/> <br/> <br/>
+   <h:commandButton value="Validate" action="#{addAddress.checkInfosAddress}"/> <br/>
+</h:form>
+
+
+
+<!-- Other HTML tags and non-input JSF elements here -->
+</h:body></html>

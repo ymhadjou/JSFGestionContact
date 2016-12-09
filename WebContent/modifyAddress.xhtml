@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head><title>Modify an address</title>
+</h:head>
+<h:body>
+<h1>Modify the address' information</h1>
+<!-- Other HTML tags and non-input JSF elements here -->
+
+<h:form>
+		<h:inputHidden value="#{modifyAddress.id}"/>
+   Rue  <h:inputText value="#{modifyAddress.street}"/> <br/> <br/>    
+   Code postal <h:inputText value="#{modifyAddress.zip}"/> <br/> <br/> 
+   Ville <h:inputText value="#{modifyAddress.city}"/> <br/> <br/> 
+   Pays <h:inputText value="#{modifyAddress.country}"/> <br/> <br/> 
+   <h:commandButton value="Validate" action="#{modifyAddress.checkInfosAddresses}"/>
+</h:form>
+
+<!-- Other HTML tags and non-input JSF elements here -->
+</h:body></html>

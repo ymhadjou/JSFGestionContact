@@ -16,7 +16,6 @@ public class ContactService {
 	
 	public String addContact (int Did, String Dnom, String Dprenom, String Dmail)
 	{
-		System.out.println("test");
 		return dao.createContact(Did, Dnom, Dprenom, Dmail);
 	}
 	

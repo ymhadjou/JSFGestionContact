@@ -44,7 +44,7 @@ public class ControlAccess {
 		    	//si le pass est correct, 
 				 //JSF forwadera l'execution vers la page welcome-page.xhtml
 		     // return("welcome-page");
-		    	return("addContact");
+		    	return("home");
 		    } else {
 		    	//Sinon, vers la page bad-login.xhtml
 		      return("bad-login");

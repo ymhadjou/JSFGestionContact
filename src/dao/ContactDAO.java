@@ -22,7 +22,7 @@ public class ContactDAO {
 		//String url ="jdbc:mysql://localhost:3306/GestionContact?useSSL=false";
 		//String user ="root";
 		//String password ="root";
-		String url = "jdbc:mysql://localhost:3306/gestioncontact";
+		String url = "jdbc:mysql://localhost:3306/GestionContact?useSSL=false";
 		String user ="root";
 		String password ="";
 		String requete="";

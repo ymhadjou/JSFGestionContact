@@ -6,57 +6,67 @@
       xmlns:f="http://java.sun.com/jsf/core">
 <h:body>
 			<h:form>
-    		   <h:dataTable var="c" value="#{deleteContact.contacts}"
+    		   <h:dataTable var="a" value="#{modifyAddress.addresses}"
                     emptyMessage="No Users Found." rowIndexvar="row">
                     <h:column style="text-align: center;">
                         <f:facet name="header">
                             <h:outputText value="id" />
                         </f:facet>
-                        <h:outputText value="#{c.id}" />
+                        <h:outputText value="#{a.id}" />
                     </h:column>
                     
                     <h:column style="text-align: center;">
                         <f:facet name="header">
-                            <h:outputText value="nom" />
+                            <h:outputText value="Rue" />
                         </f:facet>
-                        <h:outputText value="#{c.lastName}" />
+                        <h:outputText value="#{a.street}" />
                     </h:column>
                     
                     <h:column style="text-align: center;">
                         <f:facet name="header">
-                            <h:outputText value="prenom" />
+                            <h:outputText value="Ville" />
                         </f:facet>
-                        <h:outputText value="#{c.firstName}" />
+                        <h:outputText value="#{a.city}" />
                     </h:column>
                     
                     <h:column style="text-align: center;">
                         <f:facet name="header">
-                            <h:outputText value="email" />
+                            <h:outputText value="Code postal" />
                         </f:facet>
-                        <h:outputText value="#{c.email}" />
+                        <h:outputText value="#{a.zip}" />
+                    </h:column>
+                    
+                    <h:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Pays" />
+                        </f:facet>
+                        <h:outputText value="#{a.country}" />
                     </h:column>
                     
                     <h:column style="text-align: center;">
                         <f:facet name="header">
                             <h:outputText value="Actions" />
                         </f:facet>
-                        <h:commandButton value="Delete" action="#{deleteContact.checkInfosContact}">
-                        	<f:setPropertyActionListener value="#{c}" 
-							target="#{deleteContact.selectedContact}" /> 
+                        <h:commandButton value="Delete" action="#{deleteAddress.checkInfosAdresses}">
+                        	<f:setPropertyActionListener value="#{a.id}" 
+							target="#{deleteAddress.id}" /> 
                         </h:commandButton>
                          
-                        <h:commandButton value="Update" action="modifyContact.jsp">
-                        	<f:setPropertyActionListener value="#{c.id}" 
-							target="#{modifyContact.id}" />
-
-							<f:setPropertyActionListener value="#{c.firstName}" 
-							target="#{modifyContact.firstName}" /> 
+                        <h:commandButton value="Update" action="modifyAddress.checkInfosAdresses">
+                        	<f:setPropertyActionListener value="#{a.id}" 
+							target="#{modifyAddress.id}" /> 
 							
-							<f:setPropertyActionListener value="#{c.lastName}" 
-							target="#{modifyContact.lastName}" /> 
+							<f:setPropertyActionListener value="#{a.street}" 
+							target="#{modifyAddress.street}" /> 
 							
-							<f:setPropertyActionListener value="#{c.email}" 
-							target="#{modifyContact.email}" /> 
+							<f:setPropertyActionListener value="#{a.city}" 
+							target="#{modifyAddress.city}" /> 
+							
+							<f:setPropertyActionListener value="#{a.zip}" 
+							target="#{modifyAddress.zip}" /> 
+							
+							<f:setPropertyActionListener value="#{a.country}" 
+							target="#{modifyAddress.country}" /> 
 							
                         </h:commandButton>
                     </h:column>

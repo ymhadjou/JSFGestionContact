@@ -3,15 +3,23 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import domain.Contact;
 import services.ContactService;
 @ManagedBean(name="modifyContact")
 public class ModifyContactBean {
-	
-	private int id;
+
 	private String firstName;
 	private String lastName;
 	private String email;
+	private int id;
+	private Contact contact;
 	
+	public Contact getContact() {
+		return contact;
+	}
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -40,10 +48,10 @@ public class ModifyContactBean {
 	}
 	
 	public String checkInfosContact(){
-		
 		FacesContext context = FacesContext.getCurrentInstance();
 		
 		ContactService cs = new ContactService();
+		
 		
 		//Contrôle que les champs sont non-vides
 		 if (isMissing(firstName)||isMissing(lastName) || isMissing(email) || (id==0)) {
@@ -54,8 +62,9 @@ public class ModifyContactBean {
 			if(context.getMessageList().size()>0)
 				return null;
 			else{
-				cs.modifyContact(id, lastName, firstName, email); //ajout d'un contact avec les infos du formulaire
-				return ("welcome-page");
+				context.addMessage(null, new FacesMessage("Contact has been successfully updated."));
+				cs.modifyContact(id, firstName, lastName, email); //modify d'un contact avec les infos du formulaire
+				return ("home");
 			}
 	}
 	

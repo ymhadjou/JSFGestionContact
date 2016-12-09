@@ -9,11 +9,11 @@
 <!-- Other HTML tags and non-input JSF elements here -->
 
 <h:form>
-   Id <h:inputText value="#{modifyContact.id}"/> <br/> <br/> 
+		<h:inputHidden value="#{modifyContact.id}"/>
    Nom  <h:inputText value="#{modifyContact.lastName}"/> <br/> <br/>    
    Prenom <h:inputText value="#{modifyContact.firstName}"/> <br/> <br/> 
-   Mail <h:inputText value="#{modifyContact.email}"/> <br/> <br/> 
-   <h:commandButton value="modifyContact" action="#{modifyContact.checkInfosContact}"/> <br/> 
+   Mail <h:inputText value="#{modifyContact.email}"/> <br/> <br/>
+   <h:commandButton value="Validate" action="#{modifyContact.checkInfosContact}"/>
 </h:form>
 
 <!-- Other HTML tags and non-input JSF elements here -->

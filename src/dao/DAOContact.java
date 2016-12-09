@@ -21,8 +21,8 @@ public class DAOContact {
 	{
 		//System.out.println("Le contact -" + Dnom + "- a été créé.");
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/gestioncontact";
-		String uid = "root"; String passwd = "";
+		String url = "jdbc:mysql://127.0.0.1:3306/gestioncontact?useSSL=false";
+		String uid = "root"; String passwd = "root";
 		String requete;
 		Connection cx = null;
 		Statement stmt = null;
@@ -103,8 +103,8 @@ public class DAOContact {
 	public String updateContact(int Did, String Dnom, String Dprenom, String Dmail) {
 		// TODO Auto-generated method stub
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/gestioncontact";
-		String uid = "root"; String passwd = "";
+		String url = "jdbc:mysql://127.0.0.1:3306/gestioncontact?useSSL=false";
+		String uid = "root"; String passwd = "root";
 		String requete;
 		Connection cx = null;
 		Statement stmt = null;
@@ -138,8 +138,8 @@ public class DAOContact {
 	public String deleteContact(int Did) {
 		// TODO Auto-generated method stub
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/gestioncontact";
-		String uid = "root"; String passwd = "";
+		String url = "jdbc:mysql://127.0.0.1:3306/gestioncontact?useSSL=false";
+		String uid = "root"; String passwd = "root";
 		String requete;
 		Connection cx = null;
 		Statement stmt = null;
@@ -173,8 +173,8 @@ public class DAOContact {
 	public ArrayList<Contact> listContacts(){
 		ArrayList<Contact> liste = new ArrayList<Contact>();
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/gestioncontact";
-		String uid = "root"; String passwd = "";
+		String url = "jdbc:mysql://127.0.0.1:3306/gestioncontact?useSSL=false";
+		String uid = "root"; String passwd = "root";
 		String requete;
 		Connection cx = null;
 		Statement stmt = null;

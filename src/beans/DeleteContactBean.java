@@ -1,31 +1,47 @@
 package beans;
-import java.io.Serializable;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import domain.Contact;
 import services.ContactService;
 
 @ManagedBean(name="deleteContact")
-@SessionScoped
 public class DeleteContactBean  {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private Contact selectedContact;
 	private int id;
-	
 	private ContactService cs = new ContactService();
-	private ArrayList<Contact> contacts = cs.listeContacts();
+	//private List<Contact> contacts = cs.listeContacts();
+	private List<Contact> contacts;
+	private List<SelectItem> mesContacts;
+	 
 	
-	public ArrayList<Contact> getContacts() {
+	public List<SelectItem> getMesContacts() {
+		if(mesContacts!=null){
+			mesContacts = new ArrayList<SelectItem>();
+			for(Contact val : contacts){
+				mesContacts.add(new SelectItem(val.toString()));
+			}
+		}
+		return mesContacts;
+	}
+	
+	public List<Contact> getContacts() {
+		List<Contact> liste = cs.listeContacts();
+		if(liste.size()!=0){
+			for(int i=0; i<liste.size();i++){
+				this.contacts = liste;
+			}
+		}
 		return contacts;
 	}
 	public void setContacts(ArrayList<Contact> contacts) {
@@ -56,23 +72,9 @@ public class DeleteContactBean  {
 			if(context.getMessageList().size()>0)
 				return null;
 			else{
-				System.out.println("condition else" + selectedContact.getId());
+				context.addMessage(null, new FacesMessage("Contact has been successfully deleted."));
 				cs.deleteContact(selectedContact.getId()); //suppression d'un contact avec les infos du formulaire
-				return ("welcome-page");
+				return("home");
 			}
 	}
-	
-	
-	//controle champs non vides
-	private boolean isMissing(String value) {
-	    return((value == null) || (value.trim().isEmpty()));
-	  }
-	public Contact getSelectedContact() {
-		return selectedContact;
-	}
-	public void setSelectedContact(Contact selectedContact) {
-		this.selectedContact = selectedContact;
-	}
-
-
 }
