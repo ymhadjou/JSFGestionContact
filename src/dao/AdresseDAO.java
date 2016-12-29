@@ -10,14 +10,18 @@ import java.util.ArrayList;
 import domain.Adresse;
 
 public class AdresseDAO {
-	public Connection connect = ConnectionDatabase.getInstance();
-	
+
+	public Connection connect = null;
 	public AdresseDAO()
 	{
-
+		connect = ConnectionDatabase.getInstance();
 			
 	}
 	
+	public Connection getConnection()
+	{
+		return ConnectionDatabase.getInstance();
+	}
 	
 	public void createAddressDAO(String street, String city, String cp, String country)
 	{
@@ -27,7 +31,7 @@ public class AdresseDAO {
 		
 		try
 		{
-
+			connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "INSERT INTO adresse(rue,ville,cp,pays) VALUES " + "('" + street +"','" + city + "','" + cp + "','" + country + "')";
@@ -38,26 +42,22 @@ public class AdresseDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
 		}
-		finally
+		catch(Exception e)
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			System.out.println(e.getMessage());
+		}
+		/*finally
+		{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} 
+		}*/
 	}
 	
 	
@@ -68,6 +68,7 @@ public class AdresseDAO {
 		Statement stmt = null;
 		try
 		{
+			connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "UPDATE adresse SET rue = '" + a.getStreet() + "', ville = '" + a.getCity() + "', cp = '" + a.getZip() + "', pays = '" + a.getCountry() + "' WHERE id =" + a.getId() +"";
@@ -78,26 +79,22 @@ public class AdresseDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
 		}
-		finally
+		catch(Exception e)
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			System.out.println(e.getMessage());
+		}
+		/*finally
+		{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 		
 	}
 	
@@ -108,6 +105,7 @@ public class AdresseDAO {
 		Statement stmt = null;
 			try
 			{
+				connect = this.getConnection();
 				//Statement
 				 stmt = connect.createStatement();
 				 requete = "DELETE FROM Adresse WHERE id = '" + a.getId() + "'";
@@ -117,26 +115,22 @@ public class AdresseDAO {
 			}
 			catch(SQLException e)
 			{
-				e.toString();
+				System.out.println(e.getMessage());
 			}
-			finally
+			catch(Exception e)
 			{
-				try
-				{
-					if(connect!=null)
-					{
-						connect.close();
-					}
-					if(stmt!=null)
-					{
-						stmt.close();
-					}
-				}
-				catch(SQLException e)
-				{
+				System.out.println(e.getMessage());
+			}
+		/*	finally
+			{
+				try {
+					if(stmt != null) stmt.close();
+					if(connect != null) connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
+			}*/
 		}
 	
 	public void FetchAddressDAO(String id)
@@ -145,6 +139,7 @@ public class AdresseDAO {
 		Statement stmt = null;
 		try
 		{
+			connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "SELECT * FROM adresse WHERE fk_idContact_adresse = '" + id  + "'";
@@ -156,26 +151,22 @@ public class AdresseDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
 		}
-		finally
+		catch(Exception e)
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			System.out.println(e.getMessage());
+		}
+		/*finally
+		{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}
 	
 	public ArrayList<Adresse> listAddresses(){
@@ -186,6 +177,7 @@ public class AdresseDAO {
 		
 		try
 		{
+			connect = this.getConnection();
 			stmt = connect.createStatement();
 			requete = "select * from adresse";
 			ResultSet rs = stmt.executeQuery(requete);
@@ -195,16 +187,24 @@ public class AdresseDAO {
 					uneAdresse = new Adresse(rs.getInt("id"),rs.getString("ville"),rs.getString("cp"),rs.getString("pays"),rs.getString("rue"));
 					addresses.add(uneAdresse);
 				}
-			} catch (SQLException e) {
-				
-				System.out.println(e.toString());
-				
-			} finally {
-			try { 
-				if (stmt != null) stmt.close();
-				if (connect != null) connect.close();}
-			catch (SQLException e) { e.printStackTrace(); }
+			} 		catch(SQLException e)
+		{
+				System.out.println(e.getMessage());
 			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		/*	finally
+			{
+				try {
+					if(stmt != null) stmt.close();
+					if(connect != null) connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
 		
 		
 		return addresses;

@@ -10,12 +10,16 @@ import domain.Contact;
 
 public class DAOContact {
 
-	public Connection connect = ConnectionDatabase.getInstance();
+	public Connection connect = null;
 	public DAOContact()
 	{
-
+		connect = ConnectionDatabase.getInstance();
 	}
 	
+	public Connection getConnection()
+	{
+		return ConnectionDatabase.getInstance();
+	}
 	public String createContact(int Did, String Dnom, String Dprenom, String Dmail)
 	{
 
@@ -30,15 +34,24 @@ public class DAOContact {
 			System.out.println("Nombre de lignes mises à jour = " + nb);
 			//return null;
 			
-			} catch (SQLException e) {
-				return e.toString();
-			} finally {
-			try { 
-				if (stmt != null) stmt.close();
-				if (connect != null) connect.close();}
-			catch (SQLException e) { e.printStackTrace(); }
-			
+			} 		catch(SQLException e)
+		{
+				System.out.println(e.getMessage());
 			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+			/*finally
+			{
+				try {
+					if(stmt != null) stmt.close();
+					if(connect != null) connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
 		
 		return null;
 				
@@ -50,7 +63,7 @@ public class DAOContact {
 		String requete;
 		Statement stmt = null;
 		
-		try {
+		try {connect = this.getConnection();
 			stmt = connect.createStatement();
 			requete = "SELECT * FROM Contact where id = '" + Did +"'";
 			ResultSet rs = stmt.executeQuery(requete);
@@ -64,16 +77,24 @@ public class DAOContact {
 			}
 					
 			
-			} catch (SQLException e) {
-				
-				System.out.println(e.toString());
-				
-			} finally {
-			try { 
-				if (stmt != null) stmt.close();
-				if (connect != null) connect.close();}
-			catch (SQLException e) { e.printStackTrace(); }
+			}		catch(SQLException e)
+		{
+				System.out.println(e.getMessage());
 			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		/*	finally
+			{
+				try {
+					if(stmt != null) stmt.close();
+					if(connect != null) connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
 		return null;
 	}
 
@@ -83,23 +104,30 @@ public class DAOContact {
 		String requete;
 		Statement stmt = null;
 		
-		try {
+		try {connect = this.getConnection();
 			stmt = connect.createStatement();
 			requete = "UPDATE Contact SET nom='"+Dnom+"',prenom='"+Dprenom+"',mail='"+Dmail+"' WHERE id='"+Did+"'";
 			int nb = stmt.executeUpdate(requete);
 			System.out.println("nb de ligne ajouté="+nb);
-					
-			
-			} catch (SQLException e) {
-				
-				System.out.println(e.toString());
-				
-			} finally {
-			try { 
-				if (stmt != null) stmt.close();
-				if (connect != null) connect.close();}
-			catch (SQLException e) { e.printStackTrace(); }
+		}
+			catch(SQLException e)
+			{
+				System.out.println(e.getMessage());
 			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		/*	finally
+			{
+				try {
+					if(stmt != null) stmt.close();
+					if(connect != null) connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
 		return null;
 	}
 
@@ -111,23 +139,31 @@ public class DAOContact {
 		Statement stmt = null;
 		
 		try {
-
+			connect = this.getConnection();
 			stmt = connect.createStatement();
 			requete = "DELETE FROM Contact where id='"+ Did +"'";
 			int nb = stmt.executeUpdate(requete);
 			System.out.println("nb de ligne supprimé="+nb +"/n id du contact supprimé" + Did);
 			
 					
-			} catch (SQLException e) {
-				
-				System.out.println(e.toString());
-				
-			} finally {
-			try { 
-				if (stmt != null) stmt.close();
-				if (connect != null) connect.close();}
-			catch (SQLException e) { e.printStackTrace(); }
+			} 		catch(SQLException e)
+		{System.out.println("fais chier 3");
+				System.out.println(e.getMessage());
 			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage()); System.out.println("fais chier 4");
+			}
+		/*	finally
+			{
+				try {
+					if(stmt != null) stmt.close();
+					if(connect != null) connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
 		return null;
 	}
 	
@@ -140,7 +176,7 @@ public class DAOContact {
 		
 		try
 		{
-
+			connect = this.getConnection();
 			stmt = connect.createStatement();
 			requete = "select * from contact";
 			ResultSet rs = stmt.executeQuery(requete);
@@ -154,17 +190,23 @@ public class DAOContact {
 					
 					liste.add(new Contact(id, lastName, firstName, email));
 				}
-			} catch (SQLException e) {
-				
-				System.out.println(e.toString());
-				
-			} finally {
-			try { 
-				if (stmt != null) stmt.close();
-				if (connect!= null) connect.close();}
-			catch (SQLException e) { e.printStackTrace(); }
 			}
-		
+			catch(SQLException e){ System.out.println(e.getMessage()); System.out.println("fais chier 2");}
+			catch(Exception e)
+			{
+				System.out.println("fais chier 1");
+				System.out.println(e.getMessage());
+			}
+			/*finally
+			{
+				try {
+					if(stmt != null) stmt.close();
+					if(connect != null) connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
 		
 		return liste;
 		

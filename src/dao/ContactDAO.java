@@ -7,13 +7,16 @@ import java.sql.Statement;
 
 
 public class ContactDAO {
-	public Connection connect = ConnectionDatabase.getInstance();
+	public Connection connect = null;
 	public ContactDAO()
 	{
-
+		 connect = ConnectionDatabase.getInstance();
 			
 	}
-	
+	public Connection getConnection()
+	{
+		return ConnectionDatabase.getInstance();
+	}
 	
 	public void CreateContactDAO(String lastname, String name, String mail, String id, String street, String city, String zip, String country)
 	{
@@ -23,7 +26,7 @@ public class ContactDAO {
 		
 		try
 		{
-
+			connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "INSERT INTO Contact(id,nom,prenom,mail) VALUES " + "('" + id +"','" + lastname + "','" + name + "','" + mail + "')";
@@ -33,23 +36,19 @@ public class ContactDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
 		}
 		finally
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -63,37 +62,32 @@ public class ContactDAO {
 		Statement stmt = null;
 		try
 		{
-
+			connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "UPDATE Contact SET nom = '" + lastname + "', prenom = '" + name + "', mail = '" + mail + "' WHERE id = '" + id + "'";
 			 int nb = stmt.executeUpdate(requete);
 			 System.out.println("Nombre de lignes affectées = " + nb);
+		}
 			 
-			 
-		}
-		catch(SQLException e)
-		{
-			e.toString();
-		}
-		finally
-		{
-			try
-			{
-				if(connect!=null)
+				catch(SQLException e)
 				{
-					connect.close();
+					System.out.println(e.getMessage());
 				}
-				if(stmt!=null)
+				catch(Exception e)
 				{
-					stmt.close();
+					System.out.println(e.getMessage());
 				}
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
-			}
-		}
+				finally
+				{
+					try {
+						if(stmt != null) stmt.close();
+						if(connect != null) connect.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 		
 	}
 	
@@ -103,7 +97,7 @@ public class ContactDAO {
 		Statement stmt = null;
 			try
 			{
-
+				connect = this.getConnection();
 				//Statement
 				 stmt = connect.createStatement();
 				 requete = "DELETE FROM Contact WHERE id = '" + id + "'";
@@ -112,23 +106,19 @@ public class ContactDAO {
 			}
 			catch(SQLException e)
 			{
-				e.toString();
+				System.out.println(e.getMessage());
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
 			}
 			finally
 			{
-				try
-				{
-					if(connect!=null)
-					{
-						connect.close();
-					}
-					if(stmt!=null)
-					{
-						stmt.close();
-					}
-				}
-				catch(SQLException e)
-				{
+				try {
+					if(stmt != null) stmt.close();
+					if(connect != null) connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -141,7 +131,7 @@ public class ContactDAO {
 		Statement stmt = null;
 		try
 		{
-
+			connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "SELECT * FROM Contact WHERE ID = '" + id  + "'";
@@ -153,23 +143,19 @@ public class ContactDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
 		}
 		finally
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

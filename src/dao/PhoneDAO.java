@@ -12,13 +12,17 @@ import domain.Telephone;
 
 public class PhoneDAO {
 	
-	public Connection connect = ConnectionDatabase.getInstance();
+	public Connection connect = null;
 	
 	public PhoneDAO()
 	{
-		
+		connect = ConnectionDatabase.getInstance();
 	}
 	
+	public Connection getConnection()
+	{
+		return ConnectionDatabase.getInstance();
+	}
 	public void createPhoneDAO(Telephone t, Contact c)
 	{
 
@@ -26,7 +30,7 @@ public class PhoneDAO {
 				Statement stmt = null;
 				
 				try
-				{
+				{connect = this.getConnection();
 					//Statement
 					 stmt = connect.createStatement();
 					 requete = "INSERT INTO telephone(typeTelephone,numeroTelephone, fk_idContact_telephone) VALUES " + "('" + t.getType() +"','" + t.getNumero() + "','" + c.getId() +"')";
@@ -37,26 +41,22 @@ public class PhoneDAO {
 				}
 				catch(SQLException e)
 				{
-					e.toString();
+					System.out.println(e.getMessage());
 				}
-				finally
+				catch(Exception e)
 				{
-					try
-					{
-						if(connect!=null)
-						{
-							connect.close();
-						}
-						if(stmt!=null)
-						{
-							stmt.close();
-						}
-					}
-					catch(SQLException e)
-					{
+					System.out.println(e.getMessage());
+				}
+				/*finally
+				{
+					try {
+						if(stmt != null) stmt.close();
+						if(connect != null) connect.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				} 
+				}*/
 		}
 	
 	public void ModifyPhoneDAO(String typeTel, String num, String idContact)
@@ -64,7 +64,7 @@ public class PhoneDAO {
 				String requete="";
 				Statement stmt = null;
 				try
-				{
+				{connect = this.getConnection();
 					//Statement
 					 stmt = connect.createStatement();
 					 requete = "UPDATE telephone SET typeTelephone = '" + typeTel + "', numeroTelephone = '" + num + "' WHERE fk_idContact_telephone = '" + idContact + "'";
@@ -75,26 +75,22 @@ public class PhoneDAO {
 				}
 				catch(SQLException e)
 				{
-					e.toString();
+					System.out.println(e.getMessage());
 				}
-				finally
+				catch(Exception e)
 				{
-					try
-					{
-						if(connect!=null)
-						{
-							connect.close();
-						}
-						if(stmt!=null)
-						{
-							stmt.close();
-						}
-					}
-					catch(SQLException e)
-					{
+					System.out.println(e.getMessage());
+				}
+				/*finally
+				{
+					try {
+						if(stmt != null) stmt.close();
+						if(connect != null) connect.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+				}*/
 		}
 	
 	public void DeletePhoneDAO(String id)
@@ -102,7 +98,7 @@ public class PhoneDAO {
 		String requete="";
 		Statement stmt = null;
 		try
-		{	
+		{	connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "DELETE FROM telephone WHERE id = '" + id + "'";
@@ -111,26 +107,22 @@ public class PhoneDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
 		}
-		finally
+		catch(Exception e)
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			System.out.println(e.getMessage());
+		}
+	/*	finally
+		{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}
 	
 	public void FetchPhoneDAO(String id)
@@ -138,7 +130,7 @@ public class PhoneDAO {
 		String requete="";
 		Statement stmt = null;
 		try
-		{
+		{connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "SELECT * FROM telephone WHERE fk_idContact_telephone = '" + id  + "'";
@@ -150,23 +142,19 @@ public class PhoneDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
 		}
 		finally
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -178,7 +166,7 @@ public class PhoneDAO {
 		String requete="";
 		Statement stmt = null;
 		try
-		{
+		{connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "select c.nom, c.prenom, t.id, t.numeroTelephone from contact c, telephone t where c.id= t.fk_idContact_telephone";
@@ -195,26 +183,22 @@ public class PhoneDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
 		}
-		finally
+		catch(Exception e)
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			System.out.println(e.getMessage());
+		}
+		/*finally
+		{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 		return listephone;
 	}
 }

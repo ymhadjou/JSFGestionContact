@@ -8,12 +8,12 @@ import java.sql.Connection;
 public class ConnectionDatabase {
 	
 	static String driver = "com.mysql.jdbc.Driver";
-	static String url = "jdbc:mysql://localhost:3306/gestioncontact";
+	static String url = "jdbc:mysql://localhost:3306/gestioncontact?autoReconnect=true&useSSL=false";
 	//String url = "jdbc:mysql://localhost:3306/GestionContact?useSSL=false";
 	static String uid = "root"; 
 	static String passwd = "";
 	
-	private static Connection connect;
+	protected static Connection connect;
 	
 	public static Connection getInstance(){
 		if(connect == null){

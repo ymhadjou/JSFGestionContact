@@ -6,12 +6,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ContactGroupDAO {
-	public Connection connect = ConnectionDatabase.getInstance();
+	public Connection connect = null;
 	public ContactGroupDAO()
 	{
-		
+		connect = ConnectionDatabase.getInstance();
 	}
-	
+	public Connection getConnection()
+	{
+		return ConnectionDatabase.getInstance();
+	}
 	public void CreateGroupDAO(String nomGroupe)
 	{
 		String requete="";
@@ -29,26 +32,22 @@ public class ContactGroupDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
 		}
 		finally
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} 
+		}
 	}
 	
 	public void ModifyGroupDAO(String id, String nomGroupe)
@@ -57,7 +56,7 @@ public class ContactGroupDAO {
 		String requete="";
 		Statement stmt = null;
 		try
-		{
+		{connect = this.getConnection();
 			//Statement
 			 stmt = connect.createStatement();
 			 requete = "UPDATE groupe SET nomGroupe = '" + nomGroupe + "' WHERE idGroupe = '" + id + "'";
@@ -68,26 +67,22 @@ public class ContactGroupDAO {
 		}
 		catch(SQLException e)
 		{
-			e.toString();
+			System.out.println(e.getMessage());
 		}
-		finally
+		catch(Exception e)
 		{
-			try
-			{
-				if(connect!=null)
-				{
-					connect.close();
-				}
-				if(stmt!=null)
-				{
-					stmt.close();
-				}
-			}
-			catch(SQLException e)
-			{
+			System.out.println(e.getMessage());
+		}
+		/*finally
+		{
+			try {
+				if(stmt != null) stmt.close();
+				if(connect != null) connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}
 	
 	public void DeleteGroupDAO(String id)
@@ -95,7 +90,7 @@ public class ContactGroupDAO {
 		String requete="";
 		Statement stmt = null;
 				try
-				{
+				{connect = this.getConnection();
 					//Statement
 					 stmt = connect.createStatement();
 					 requete = "DELETE FROM groupe WHERE idGroupe = '" + id + "'";
@@ -105,26 +100,22 @@ public class ContactGroupDAO {
 				}
 				catch(SQLException e)
 				{
-					e.toString();
+					System.out.println(e.getMessage());
 				}
-				finally
+				catch(Exception e)
 				{
-					try
-					{
-						if(connect!=null)
-						{
-							connect.close();
-						}
-						if(stmt!=null)
-						{
-							stmt.close();
-						}
-					}
-					catch(SQLException e)
-					{
+					System.out.println(e.getMessage());
+				}
+			/*	finally
+				{
+					try {
+						if(stmt != null) stmt.close();
+						if(connect != null) connect.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+				}*/
 		}
 	
 	public void AddContactToGroupDAO(String idContact, String idGroupe)
@@ -133,7 +124,7 @@ public class ContactGroupDAO {
 				Statement stmt = null;
 				
 				try
-				{	
+				{	connect = this.getConnection();
 					//Statement
 					 stmt = connect.createStatement();
 					 requete = "INSERT INTO contact_groupe(idGroupe, idContact) VALUES " + "('" + idGroupe +"','"+idContact+"')";
@@ -144,26 +135,22 @@ public class ContactGroupDAO {
 				}
 				catch(SQLException e)
 				{
-					e.toString();
+					System.out.println(e.getMessage());
 				}
-				finally
+				catch(Exception e)
 				{
-					try
-					{
-						if(connect!=null)
-						{
-							connect.close();
-						}
-						if(stmt!=null)
-						{
-							stmt.close();
-						}
-					}
-					catch(SQLException e)
-					{
+					System.out.println(e.getMessage());
+				}
+		/*		finally
+				{
+					try {
+						if(stmt != null) stmt.close();
+						if(connect != null) connect.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+				}*/
 		}
 	
 	public void DeleteContactFromGroupDAO(String idContact, String idGroupe)
@@ -171,7 +158,7 @@ public class ContactGroupDAO {
 				String requete="";
 				Statement stmt = null;
 						try
-						{	
+						{	connect = this.getConnection();
 							//Statement
 							 stmt = connect.createStatement();
 							 requete = "DELETE FROM contact_groupe WHERE idGroupe = '" + idGroupe + "' AND idContact = '" + idContact + "'";
@@ -181,25 +168,21 @@ public class ContactGroupDAO {
 						}
 						catch(SQLException e)
 						{
-							e.toString();
+							System.out.println(e.getMessage());
 						}
-						finally
+						catch(Exception e)
 						{
-							try
-							{
-								if(connect!=null)
-								{
-									connect.close();
-								}
-								if(stmt!=null)
-								{
-									stmt.close();
-								}
-							}
-							catch(SQLException e)
-							{
+							System.out.println(e.getMessage());
+						}
+					/*	finally
+						{
+							try {
+								if(stmt != null) stmt.close();
+								if(connect != null) connect.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-						}
+						}*/
 	}
 }
